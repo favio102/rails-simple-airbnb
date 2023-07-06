@@ -1,6 +1,36 @@
-<h1>flats</h1>
-<ul>
-  <%= @flats.each do |flat| %>
-  <li> <%= flat.name %> </li>
+<div class="container">
+  <h1>All flats</h1>
+  <p> <%= link_to 'Create new flat', flats_new_path %> </p>
+</div>
+<div class="container">
+  <div class="row">
+    <% @flats.each do |flat| %>
+    <div class="col-md-4">
+      <div class="flat-card border border-primary">
+        <%# <div class="flat-card-image" style="background-image: url('https://images.pexels.com/photos/2510067/pexels-photo-2510067.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')"></div> %>
+        <div class="flat-card-image" style="background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156?w=1200')"></div>
+        <div class="flat-card-content">
+          <div class="flat-card-title">
+            <h4> <%= flat.name %> </h4>
+          </div>
+          <p> <%= flat.address %> </p>
+          <div class="flex">
+            <div class="flex align-items-center">
+              <i class="fa-solid fa-people-line"></i>
+              <span> <%= flat.number_of_guests %> </span>
+            </div>
+            <div class="flex align-items-center ms-3">
+              <i class="fa-solid fa-euro-sign"></i>
+              <span> <%= flat.price_per_night %> </span>
+            </div>
+          </div>
+        </div>
+        <div class="flat-card-actions">
+          <%= link_to 'More info', flat_path(flat[:id]) %>
+          <%= link_to 'Edit', flats_edit_path(flat[:id]), class: "ms-3 text-warning" %>
+          <%= link_to 'Delete', flat_path(flat), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "ms-3 text-danger" %>
+        </div>
+    </div>
+  </div>
   <% end %>
-</ul>
+</div>
